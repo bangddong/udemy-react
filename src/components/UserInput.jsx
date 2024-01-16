@@ -1,13 +1,12 @@
 import { useState } from "react";
 
 export default function UserInput({ onChangeValue, initialInput }) {
-  const [inputValues, setInputValues] = useState(initialInput);
   const { initialInvestment, annualInvestment, expectedReturn, duration } =
-    inputValues;
+    initialInput;
 
   function handleOnChage(event) {
     const { value, name: inputName } = event.target;
-    setInputValues({ ...inputValues, [inputName]: value });
+    onChangeValue({ ...initialInput, [inputName]: parseFloat(value) });
   }
 
   return (

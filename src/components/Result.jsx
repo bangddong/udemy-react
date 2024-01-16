@@ -1,4 +1,6 @@
-export default function Result() {
+import { formatter } from "../util/investment";
+
+export default function Result({ annualDataList }) {
   return (
     <table id="result">
       <thead>
@@ -11,13 +13,15 @@ export default function Result() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-        </tr>
+        {annualDataList.map((annualData) => (
+          <tr key={annualData.year}>
+            <td>{annualData.year}</td>
+            <td>{formatter.format(annualData.valueEndOfYear)}</td>
+            <td>{formatter.format(annualData.interest)}</td>
+            <td>{formatter.format(annualData.totalInterrest)}</td>
+            <td>{formatter.format(annualData.investedCaptial)}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
