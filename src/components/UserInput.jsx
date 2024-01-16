@@ -1,24 +1,55 @@
-export default function UserInput() {
+import { useState } from "react";
+
+export default function UserInput({ onChangeValue, initialInput }) {
+  const [inputValues, setInputValues] = useState(initialInput);
+  const { initialInvestment, annualInvestment, expectedReturn, duration } =
+    inputValues;
+
+  function handleOnChage(event) {
+    const { value, name: inputName } = event.target;
+    setInputValues({ ...inputValues, [inputName]: value });
+  }
+
   return (
     <section id="user-input">
       <div className="input-group">
         <p>
           <label>INITAL INVESTMENT</label>
-          <input type="number"></input>
+          <input
+            name="initialInvestment"
+            value={initialInvestment}
+            type="number"
+            onChange={handleOnChage}
+          ></input>
         </p>
         <p>
           <label>ANNUAL INVESTMENT</label>
-          <input type="number"></input>
+          <input
+            name="annualInvestment"
+            value={annualInvestment}
+            type="number"
+            onChange={handleOnChage}
+          ></input>
         </p>
       </div>
       <div className="input-group">
         <p>
           <label>EXPECTED RETURN</label>
-          <input type="number"></input>
+          <input
+            name="expectedReturn"
+            value={expectedReturn}
+            type="number"
+            onChange={handleOnChage}
+          ></input>
         </p>
         <p>
           <label>DUREATION</label>
-          <input type="number"></input>
+          <input
+            name="duration"
+            value={duration}
+            type="number"
+            onChange={handleOnChage}
+          ></input>
         </p>
       </div>
     </section>
