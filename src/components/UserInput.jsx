@@ -6,7 +6,7 @@ export default function UserInput({ onChangeValue, initialInput }) {
 
   function handleChange(event) {
     const { value, name: inputName } = event.target;
-    onChangeValue({ ...initialInput, [inputName]: parseFloat(value) });
+    onChangeValue({ ...initialInput, [inputName]: +value });
   }
 
   return (
