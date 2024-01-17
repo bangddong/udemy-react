@@ -4,7 +4,7 @@ export default function UserInput({ onChangeValue, initialInput }) {
   const { initialInvestment, annualInvestment, expectedReturn, duration } =
     initialInput;
 
-  function handleOnChage(event) {
+  function handleChange(event) {
     const { value, name: inputName } = event.target;
     onChangeValue({ ...initialInput, [inputName]: parseFloat(value) });
   }
@@ -18,7 +18,8 @@ export default function UserInput({ onChangeValue, initialInput }) {
             name="initialInvestment"
             value={initialInvestment}
             type="number"
-            onChange={handleOnChage}
+            onChange={handleChange}
+            required
           ></input>
         </p>
         <p>
@@ -27,7 +28,8 @@ export default function UserInput({ onChangeValue, initialInput }) {
             name="annualInvestment"
             value={annualInvestment}
             type="number"
-            onChange={handleOnChage}
+            onChange={handleChange}
+            required
           ></input>
         </p>
       </div>
@@ -38,7 +40,8 @@ export default function UserInput({ onChangeValue, initialInput }) {
             name="expectedReturn"
             value={expectedReturn}
             type="number"
-            onChange={handleOnChage}
+            onChange={handleChange}
+            required
           ></input>
         </p>
         <p>
@@ -47,7 +50,8 @@ export default function UserInput({ onChangeValue, initialInput }) {
             name="duration"
             value={duration}
             type="number"
-            onChange={handleOnChage}
+            onChange={handleChange}
+            required
           ></input>
         </p>
       </div>
