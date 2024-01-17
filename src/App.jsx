@@ -5,7 +5,14 @@ import UserInput from "./components/UserInput";
 import { calculateInvestmentResults } from "./util/investment";
 
 function App() {
-  const [inputValues, setInputValues] = useState(0, 0, 0, 0);
+  const [inputValues, setInputValues] = useState({
+    initialInvestment: 10000,
+    annualInvestment: 1200,
+    expectedReturn: 6,
+    duration: 10,
+  });
+
+  const inputIsValid = inputValues.duration >= 1;
 
   const annualDataList = calculateInvestmentResults({ ...inputValues });
 
@@ -17,7 +24,10 @@ function App() {
     <>
       <Header />
       <UserInput initialInput={inputValues} onChangeValue={handleInputChange} />
-      <Result annualDataList={annualDataList} />
+      {!inputIsValid && (
+        <p className="center">Please enter a duration greater than zero.</p>
+      )}
+      {inputIsValid && <Result annualDataList={annualDataList} />}
     </>
   );
 }

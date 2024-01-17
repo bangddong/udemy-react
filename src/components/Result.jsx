@@ -5,6 +5,7 @@ export default function Result({ annualDataList }) {
     annualDataList[0].valueEndOfYear -
     annualDataList[0].interest -
     annualDataList[0].annualInvestment;
+
   return (
     <table id="result">
       <thead>
