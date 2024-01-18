@@ -1,58 +1,50 @@
-import { useState } from "react";
-
-export default function UserInput({ onChangeValue, initialInput }) {
-  const { initialInvestment, annualInvestment, expectedReturn, duration } =
-    initialInput;
-
-  function handleChange(event) {
-    const { value, name: inputName } = event.target;
-    onChangeValue({ ...initialInput, [inputName]: +value });
-  }
-
+export default function UserInput({ onChange, userInput }) {
   return (
     <section id="user-input">
       <div className="input-group">
         <p>
-          <label>INITAL INVESTMENT</label>
+          <label>Initial Investment</label>
           <input
-            name="initialInvestment"
-            value={initialInvestment}
             type="number"
-            onChange={handleChange}
             required
-          ></input>
+            value={userInput.initialInvestment}
+            onChange={(event) =>
+              onChange('initialInvestment', event.target.value)
+            }
+          />
         </p>
         <p>
-          <label>ANNUAL INVESTMENT</label>
+          <label>Annual Investment</label>
           <input
-            name="annualInvestment"
-            value={annualInvestment}
             type="number"
-            onChange={handleChange}
             required
-          ></input>
+            value={userInput.annualInvestment}
+            onChange={(event) =>
+              onChange('annualInvestment', event.target.value)
+            }
+          />
         </p>
       </div>
       <div className="input-group">
         <p>
-          <label>EXPECTED RETURN</label>
+          <label>Expected Return</label>
           <input
-            name="expectedReturn"
-            value={expectedReturn}
             type="number"
-            onChange={handleChange}
             required
-          ></input>
+            value={userInput.expectedReturn}
+            onChange={(event) =>
+              onChange('expectedReturn', event.target.value)
+            }
+          />
         </p>
         <p>
-          <label>DUREATION</label>
+          <label>Duration</label>
           <input
-            name="duration"
-            value={duration}
             type="number"
-            onChange={handleChange}
             required
-          ></input>
+            value={userInput.duration}
+            onChange={(event) => onChange('duration', event.target.value)}
+          />
         </p>
       </div>
     </section>

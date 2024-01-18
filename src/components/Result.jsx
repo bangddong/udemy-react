@@ -1,10 +1,12 @@
-import { formatter } from "../util/investment";
+import { calculateInvestmentResults, formatter } from "../util/investment.js";
 
-export default function Result({ annualDataList }) {
+export default function Result({ input }) {
+  const results = [];
+  calculateInvestmentResults(input, results);
   const initialInvestment =
-    annualDataList[0].valueEndOfYear -
-    annualDataList[0].interest -
-    annualDataList[0].annualInvestment;
+    results[0].valueEndOfYear -
+    results[0].interest -
+    results[0].annualInvestment;
 
   return (
     <table id="result">
@@ -18,21 +20,20 @@ export default function Result({ annualDataList }) {
         </tr>
       </thead>
       <tbody>
-        {annualDataList.map((annualData) => {
-          const totalInterrest =
-            annualData.valueEndOfYear -
-            annualData.annualInvestment * annualData.year -
+        {results.map((yearData) => {
+          const totalInterest =
+            yearData.valueEndOfYear -
+            yearData.annualInvestment * yearData.year -
             initialInvestment;
-          const totalAmonutInvested =
-            annualData.valueEndOfYear - totalInterrest;
+          const totalAmountInvested = yearData.valueEndOfYear - totalInterest;
 
           return (
-            <tr key={annualData.year}>
-              <td>{annualData.year}</td>
-              <td>{formatter.format(annualData.valueEndOfYear)}</td>
-              <td>{formatter.format(annualData.interest)}</td>
-              <td>{formatter.format(totalInterrest)}</td>
-              <td>{formatter.format(totalAmonutInvested)}</td>
+            <tr key={yearData.year}>
+              <td>{yearData.year}</td>
+              <td>{formatter.format(yearData.valueEndOfYear)}</td>
+              <td>{formatter.format(yearData.interest)}</td>
+              <td>{formatter.format(totalInterest)}</td>
+              <td>{formatter.format(totalAmountInvested)}</td>
             </tr>
           );
         })}
