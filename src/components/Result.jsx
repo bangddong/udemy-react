@@ -9,8 +9,8 @@ export default function Result({ input }) {
     results[0].annualInvestment;
 
   return (
-    <table id="result">
-      <thead>
+    <table className="max-w-[50rem] mx-auto my-8 p-4 table-fixed border-spacing-4 text-right">
+      <thead className="text-xs text-emerald-200">
         <tr>
           <th>Year</th>
           <th>Investment Value</th>
@@ -19,7 +19,7 @@ export default function Result({ input }) {
           <th>Invested Capital</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="font-roboto text-sm text-emerald-50">
         {results.map((yearData) => {
           const totalInterest =
             yearData.valueEndOfYear -
