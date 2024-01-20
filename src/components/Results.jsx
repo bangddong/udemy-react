@@ -1,8 +1,16 @@
 import { calculateInvestmentResults, formatter } from "../util/investment.js";
 
-export default function Result({ input }) {
+export default function Results({ input }) {
   const results = [];
   calculateInvestmentResults(input, results);
+
+  if (results <= 0) {
+    return (
+      <p className="text-center">
+        Pleases input duration value more than zero.
+      </p>
+    );
+  }
   const initialInvestment =
     results[0].valueEndOfYear -
     results[0].interest -
