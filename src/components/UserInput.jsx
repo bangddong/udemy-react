@@ -1,9 +1,10 @@
 import Input from "./Input";
+import InputGroup from "./InputGroup";
 
 export default function UserInput({ onChange, userInput }) {
   return (
     <section className="p-4 max-w-[30rem] my-8 mx-auto border-r-4 bg-gradient-to-r from-emerald-700 to-emerald-600">
-      <div className="flex justify-evenly gap-6">
+      <InputGroup>
         <Input
           label="Initial Investment"
           type="number"
@@ -20,8 +21,8 @@ export default function UserInput({ onChange, userInput }) {
           value={userInput.annualInvestment}
           onChange={(event) => onChange("annualInvestment", event.target.value)}
         />
-      </div>
-      <div className="flex justify-evenly gap-6">
+      </InputGroup>
+      <InputGroup>
         <Input
           label="Expected Return"
           type="number"
@@ -37,7 +38,7 @@ export default function UserInput({ onChange, userInput }) {
           value={userInput.duration}
           onChange={(event) => onChange("duration", event.target.value)}
         />
-      </div>
+      </InputGroup>
     </section>
   );
 }
