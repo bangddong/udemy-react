@@ -1,4 +1,5 @@
 import { forwardRef, useImperativeHandle, useRef } from "react";
+import { createPortal } from "react-dom";
 
 const ResultModal = forwardRef(function ResultModal(
   { targetTime, remainingTime, onReset },
@@ -23,7 +24,7 @@ const ResultModal = forwardRef(function ResultModal(
   const pStrongStyle = "text-[#10655b]";
   const h2Style = "font-handjet mt-0 mr-0 mb-1 ml-0 text-[3rem] uppercase";
 
-  return (
+  return createPortal(
     <dialog
       onClose={onReset}
       ref={dialog}
@@ -46,7 +47,8 @@ const ResultModal = forwardRef(function ResultModal(
           Close
         </button>
       </form>
-    </dialog>
+    </dialog>,
+    document.getElementById("modal")
   );
 });
 
