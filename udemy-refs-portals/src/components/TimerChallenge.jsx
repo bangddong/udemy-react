@@ -6,25 +6,38 @@ export default function TimerChallenge({ title, targetTime }) {
   const timer = useRef();
   const dialog = useRef();
 
-  const [timerStarted, setTimerStarted] = useState(false);
-  const [timerExpired, setTimerExpired] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(targetTime * 1000);
+
+  const timmerIsActive = timeRemaining > 0 && timeRemaining < targetTime * 1000;
+
+  if (timeRemaining <= 0) {
+    clearInterval(timer.current);
+    dialog.current.open();
+  }
+
+  function handleReset() {
+    setTimeRemaining(targetTime * 1000);
+  }
 
   function handleStart() {
-    timer.current = setTimeout(() => {
-      setTimerExpired(true);
-      dialog.current.showModal();
-    }, targetTime * 1000);
-
-    setTimerStarted(true);
+    timer.current = setInterval(() => {
+      setTimeRemaining((prevTimeRemaining) => prevTimeRemaining - 10);
+    }, 10);
   }
 
   function handleStop() {
-    clearTimeout(timer.current);
+    dialog.current.open();
+    clearInterval(timer.current);
   }
 
   return (
     <>
-      <ResultModal ref={dialog} targetTime={targetTime} result="lost" />
+      <ResultModal
+        ref={dialog}
+        targetTime={targetTime}
+        remainingTime={timeRemaining}
+        onReset={handleReset}
+      />
       <section className="w-[22rem] flex flex-col items-center justify-center p-8 mx-auto my-8 bg-gradient-radial-challenge text-[#221c18] shadow-challenge-box rounded-[6px]">
         <h2 className="text-2xl tracking-widest m-0 text-center uppercase text-[#221c18]">
           {title}
@@ -34,14 +47,14 @@ export default function TimerChallenge({ title, targetTime }) {
         </p>
         <p>
           <button
-            onClick={timerStarted ? handleStop : handleStart}
+            onClick={timmerIsActive ? handleStop : handleStart}
             className="mt-4 px-4 py-2 border-none rounded-[4px] bg-button text-[#edfcfa] text-xl cursor-pointer hover:bg-[#051715]"
           >
-            {timerStarted ? "Stop" : "Start"} Challenge
+            {timmerIsActive ? "Stop" : "Start"} Challenge
           </button>
         </p>
-        <p className={timerStarted ? "animate-challenge-active" : undefined}>
-          {timerStarted ? "Time is running..." : "Timer inactive"}
+        <p className={timmerIsActive ? "animate-challenge-active" : undefined}>
+          {timmerIsActive ? "Time is running..." : "Timer inactive"}
         </p>
       </section>
     </>

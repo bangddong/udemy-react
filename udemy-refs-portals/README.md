@@ -30,13 +30,13 @@ ref는 값의 변화가 일어나도 **다시 렌더링 되지 않는다**
 import { useRef } from "react";
 
 function Component() {
-  // 다시 렌더링 될 때 값 또한 초기화 된다!
+  ✅ 다시 렌더링 될 때 값 또한 초기화 된다!
   let normalVariable = 0;
 
-  // setStateVariable를 통해 상태가 바뀌면 렌더링이 발생한다!
+  ✅ setStateVariable를 통해 상태가 바뀌면 렌더링이 발생한다!
   const [stateVariable, setStateVariable] = useState(0);
 
-  // 다시 렌더링 되어도 값을 기억하지만 참조가 변해도 렌더링은 발생하지 않는다!
+  ✅ 다시 렌더링 되어도 값을 기억하지만 참조가 변해도 렌더링은 발생하지 않는다!
   const refVariable = useRef(0);
 }
 ```
@@ -60,7 +60,7 @@ import { useRef } from "react";
     )
   }
 
-  // 에러발생
+  ❌ 에러발생
   fucntion ChildComponent({ref, text}) {
     return (
       <h1 ref={ref}>${text}</h1>
@@ -91,8 +91,8 @@ import { useRef, forwardRef } from "react";
     )
   }
 
-  // 기존 function을 forwardRef로 감싸고
-  // destructuring과 별도로 ref 파라미터로 받는다
+  ✅ 기존 function을 forwardRef로 감싸고
+      destructuring과 별도로 ref 파라미터로 받는다
   forwardRef(fucntion ChildComponent({text}, ref) {
     return (
       <h1 ref={ref}>{text}</h1>

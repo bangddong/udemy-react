@@ -24,6 +24,18 @@ export default {
         "challenge-active": "flash 1s infinite",
         "modal-open": "slide-in-from-top 0.35s ease-out",
       },
+      keyframes: {
+        "slide-in-from-top": {
+          "0%": {
+            transform: "translateY(-15%)",
+            opacity: 0,
+          },
+          "100%": {
+            transform: "translateY(0)",
+            opacity: 1,
+          },
+        },
+      },
       backgroundColor: {
         modal: "rgba(0, 0, 0, 0.9)",
       },
