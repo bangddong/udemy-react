@@ -1,6 +1,7 @@
 import logo from "../assets/no-projects.png";
+import Button from "./Button";
 
-export default function NoProject({ onCreateClick }) {
+export default function NoProject({ onAddProject }) {
   return (
     <div className="w-2/3 mt-24 text-center">
       <img
@@ -8,18 +9,15 @@ export default function NoProject({ onCreateClick }) {
         src={logo}
         alt="No project image"
       />
-      <h2 className="my-4 text-xl font-bold text-stone-700">
+      <h2 className="my-4 text-xl font-bold text-stone-500">
         No Project Selected
       </h2>
       <p className="mb-4 text-stone-400">
         Select a project or get started with a new one
       </p>
-      <button
-        onClick={onCreateClick}
-        className="px-6 py-2 rounded-md bg-stone-800 text-stone-400 hover:bg-stone-950"
-      >
-        Create new project
-      </button>
+      <p className="mt-8">
+        <Button onClick={onAddProject}>Create new project</Button>
+      </p>
     </div>
   );
 }
