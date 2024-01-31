@@ -23,10 +23,7 @@ function isPrime(number) {
   return true;
 }
 
-/**
- * memo() 사용시 props가 변경되지 않으면 re-rendering 하지 않는다.
- */
-const Counter = memo(function Counter({ initialCount }) {
+export default function Counter({ initialCount }) {
   log("<Counter /> rendered", 1);
   const initialCountIsPrime = isPrime(initialCount);
 
@@ -57,6 +54,4 @@ const Counter = memo(function Counter({ initialCount }) {
       </p>
     </section>
   );
-});
-
-export default Counter;
+}
