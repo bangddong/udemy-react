@@ -7,6 +7,8 @@ import Products from "./components/Shop/Products";
 import { uiActions } from "./stroe/ui-slice";
 import Notification from "./components/UI/Notification";
 
+let isInitial = true;
+
 function App() {
   const dispatch = useDispatch();
   const showCart = useSelector((state) => state.ui.cartIsVisible);
@@ -26,10 +28,7 @@ function App() {
 
       const response = await fetch("http://localhost:8080/api/cart", {
         method: "PUT",
-        body: JSON.stringify(cart),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: JSON.stringify(cart.items),
       });
 
       if (!response.ok) {
@@ -44,6 +43,11 @@ function App() {
         })
       );
     };
+
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
 
     sendCartData().catch((error) => {
       dispatch(
